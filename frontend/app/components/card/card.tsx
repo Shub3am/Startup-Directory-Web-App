@@ -1,12 +1,12 @@
 import "./style.css"
-export default function Card({ name, foundingYear, Funding, City}) {
+export default function Card({ name, foundingYear, Funding, Description, City, Industry}) {
 
-    return <div  className="card mx-auto my-4">
+    return <div  className="card mx-auto my-4 capitalize">
     <div className="content">
       <div className="back">
         <div className="back-content">
         <p className="city">{name}</p>
-    <p className="weather">Founded In {foundingYear}</p>
+    <p className="text-center">Founded<br/>{foundingYear}</p>
           <strong>Hover Me</strong>
           <div className="minmaxContainer">
       <div className="min">
@@ -21,27 +21,19 @@ export default function Card({ name, foundingYear, Funding, City}) {
         </div>
       </div>
       <div className="front">
-        
-        <div className="img">
-          <div className="circle">
-          </div>
-          <div className="circle" id="right">
-          </div>
-          <div className="circle" id="bottom">
-          </div>
-        </div>
+
   
         <div className="front-content">
-          <small className="badge">Pasta</small>
+          <small className="badge">About</small>
           <div className="description">
             <div className="title">
               <p className="title">
-                <strong>Spaguetti Bolognese</strong>
+                <strong>{Description}</strong>
               </p>
               
             </div>
             <p className="card-footer">
-              30 Mins &nbsp; | &nbsp; 1 Serving
+              Industry: {Industry}
             </p>
           </div>
         </div>

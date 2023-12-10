@@ -1,3 +1,4 @@
+import AddNew from "../addNew/page"
 export default async function HEADER() {
     return (<header className="bg-gray-50">
     <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
@@ -40,6 +41,7 @@ export default async function HEADER() {
         <p className="mt-1.5 text-sm text-gray-500">
           Find Startups that Rock. Keep it up! 🚀
         </p>
+        <AddNew/>
       </div>
     </div>
   </header>)
