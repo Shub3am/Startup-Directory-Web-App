@@ -29,6 +29,7 @@ db.all("SELECT * from STARTUP_DIRECTORY", (err, result)=> {
             let date = moment(data.Date, 'DD/MM/YYYY')
             date = date.format('YYYY-MM-DD')
             let dataValues = { $name: StartupName, $description: SubVertical, $founded: date, $industry: IndustryVertical, $funding: AmountInUSD,$investor: InvestorsName,$investmentType: InvestmentType , $city: CityLocation}
+            console.log(dataValues)
                 Object.keys(dataValues).forEach(property=> {
                     if (!dataValues[property]) {
                         dataValues[property] = null
