@@ -13,18 +13,11 @@ db.on("error", (err) => console.error(`Error Caused Due ${err}`)) // Throwing Er
 
 //Check Whether Database Exists, If not, seeds the Data
 Seeder("./startup_funding.csv", Table, db) //Parameters: (CSV FILE, TABLE NAME, DB Connection)
-
 app.post("/", (req,res)=> {
     let pageNo = req.body.page
-    query = `select * from ${Table}`
-
+    query = `select * from ${Table} ORDER BY ID DESC LIMIT 12`
     //Returning Only 10 Records Per Page for SSR
-    if(pageNo && pageNo > 1) {
-        query += ` where id >= ${pageNo}0 and id <= ${pageNo+1}0 `
-    } else if (pageNo && pageNo == 1) {
-        query += ' where id >= 0 and id <= 10'
-    }
-    console.log(query)
+    if (pageNo && pageNo > 1) { (query += ` where id >= ${pageNo}0 and id <= ${pageNo+1}0 `) }
     db.all(query, (err,rows)=> {
         err ? res.status(404).json(`Error Occured Due to ${err}`) : res.json(rows)
     }) 
