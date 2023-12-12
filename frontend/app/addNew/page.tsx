@@ -41,10 +41,10 @@ function PopupModal({setOpen}) {
                 
                 <input onChange={(evt)=> setInvestor(evt.target.value)} id="funding" type="number" className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="Jeff Bezos" required/>
             </div>
-            <label htmlFor="Industry" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Industry</label>
+            <label htmlFor="Industry" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Industry*</label>
             <div className="relative mb-5 mt-2">
                 
-                <input onChange={(evt)=> setIndustry(evt.target.value)} id="Industry" type="text" className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="IT" />
+                <input onChange={(evt)=> setIndustry(evt.target.value)} id="Industry" type="text" className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="IT" required />
             </div>
             <label htmlFor="City" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">City</label>
             <div className="relative mb-5 mt-2">

@@ -7,7 +7,7 @@ type Schema = {
 }
 
 async function getRecords() {
-  let res = await fetch(process.env.SERVER_URL, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({page: 1})})
+  let res = await fetch(process.env.SERVER_URL, {method: "POST", headers: {"Content-Type": "application/json"}, cache: "no-store" , body: JSON.stringify({page: 1})})
   let data = await res.json()
   return data
 }
