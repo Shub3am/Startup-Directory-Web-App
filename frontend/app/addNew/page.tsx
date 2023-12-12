@@ -82,7 +82,7 @@ async function createStartup(startup: {name:string,description:string,date: Date
 }
 
 
-export default function addNew() {
+export default function AddNew() {
 
     const [open, setOpen] = useState(false)
 
