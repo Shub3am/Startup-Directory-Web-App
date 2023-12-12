@@ -1,13 +1,12 @@
 'use client'
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import {useState, useTransition} from "react"
+
 export default function Search() {
     let path = usePathname()
     let Router = useRouter()
     
     function handleQuery(query) {
-        
         (query && query.length) ? Router.replace(`${path}?search=${query}`) : Router.replace(path)
     }
     return           <div className="relative">
