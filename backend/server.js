@@ -15,7 +15,7 @@ db.on("error", (err) => console.error(`Error Caused Due ${err}`)) // Throwing Er
 Seeder("./startup_funding.csv", Table, db) //Parameters: (CSV FILE, TABLE NAME, DB Connection)
 app.post("/", (req,res)=> {
     let pageNo = req.body.page
-    query = `select * from ${Table} ORDER BY ID DESC LIMIT 12`
+    query = `select * from ${Table} where Industry != 'Unknown' AND Description IS NOT NULL ORDER BY ID DESC LIMIT 12 `
     //Returning Only 10 Records Per Page for SSR
     if (pageNo && pageNo > 1) { (query += ` where id >= ${pageNo}0 and id <= ${pageNo+1}0 `) }
     db.all(query, (err,rows)=> {
@@ -32,7 +32,7 @@ app.post("/addNew", (req,res)=> {
     date = date.format('YYYY-MM-DD')
     startupData.date = date
     
-    startupData['investmentType'] = "da"
+    startupData['investmentType'] = "ToBeDefined"
     //schema of startupData: {name, description, funding, industry, city, date}
     Object.keys(startupData).forEach( item=> {
         (startupData[item] ? null : startupData[item] = '')
