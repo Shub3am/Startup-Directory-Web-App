@@ -39,7 +39,7 @@ function PopupModal({setOpen}) {
             <label htmlFor="funding" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Investor*</label>
             <div className="relative mb-5 mt-2">
                 
-                <input onChange={(evt)=> setInvestor(evt.target.value)} id="funding" type="number" className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="Jeff Bezos" required/>
+                <input onChange={(evt)=> setInvestor(evt.target.value)} id="funding" type="text" className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="Jeff Bezos" required/>
             </div>
             <label htmlFor="Industry" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Industry*</label>
             <div className="relative mb-5 mt-2">
@@ -74,7 +74,8 @@ function PopupModal({setOpen}) {
 async function createStartup(startup: {name:string,description:string,date: Date,industry: string, funding: number, investor: string, city: string}, setOpen: boolean, setError: boolean) {
     (startup.city ? null : startup.city = "?");
     (startup.industry ? null : startup.industry = "?");
-    const addToServer = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/addNew`, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({startup })});
+
+    const addToServer = await fetch(`${process.env.SERVER}/addNew`, {method: "POST", cache: 'no-cache',headers: {"Content-Type": "application/json"}, body: JSON.stringify({startup })});
     const result = await addToServer.json();
     console.log(result)
     result ? setOpen(false) : setError(`Failed Adding Startup due to ${result}`);
@@ -87,6 +88,7 @@ export default function AddNew() {
     const [open, setOpen] = useState(false)
 
     if (open) {
+
         return (<PopupModal setOpen={setOpen}/>)
     } else {
         return     <button onClick={()=> { setOpen(true)}} className="relative">
