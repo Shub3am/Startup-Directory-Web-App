@@ -1,5 +1,5 @@
-import Search from "./Search/page"
-import AddNew from "../addNew/page"
+import Search from "../Search/page"
+import AddNew from "../../addNew/page"
 export default async function HEADER() {
     return (<header className="bg-gray-50">
     <div className="mx-auto flex flex-col align-items-center md:flex-row justify-center md:justify-between max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
@@ -17,6 +17,7 @@ export default async function HEADER() {
           Find Startups that Rock. Keep it up! 🚀
         </p>
         <AddNew/>
+        
       </div>
       <div className="flex my-4 mx-auto flex-col justify-center align-items-center m-auto ">
 
@@ -24,5 +25,6 @@ export default async function HEADER() {
   
         </div>
     </div>
+    
   </header>)
 }

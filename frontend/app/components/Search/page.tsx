@@ -1,8 +1,9 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 export default function Search() {
+  //Refer to Startup_Card Array Map Function for sorting details
     let path = usePathname()
     let Router = useRouter()
     
