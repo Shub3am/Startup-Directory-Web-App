@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function PopupModal({setOpen}) {
     const [name, setName] = useState("")
@@ -11,6 +12,7 @@ function PopupModal({setOpen}) {
     const [error, setError] = useState(false)
     const [investor, setInvestor] = useState("")
 
+    const router = useRouter()
 
 
     return <div className="absolute h-screen "><div className="py-12 bg-opacity-50 backdrop-blur-lg transition duration-150 ease-in-out z-10 top-0 fixed right-0 bottom-0 left-0" id="modal">
@@ -54,7 +56,7 @@ function PopupModal({setOpen}) {
             <div className="flex items-center justify-start w-full">
                 <button type="submit" onClick={(evt)=>{
                     evt.preventDefault()
-                    createStartup({name,description,date ,industry,funding, investor,city}, setOpen, setError)
+                    createStartup({name,description,date ,industry,funding, investor,city}, setOpen, setError, router)
                 }} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">Submit</button>
                 <button className="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm" onClick={()=>setOpen(false)}>Cancel</button>
             </div></form>
@@ -71,14 +73,19 @@ function PopupModal({setOpen}) {
 </div>
 }
 
-async function createStartup(startup: {name:string,description:string,date: Date,industry: string, funding: number, investor: string, city: string}, setOpen: boolean, setError: boolean) {
+async function createStartup(startup: {name:string,description:string,date: Date,industry: string, funding: number, investor: string, city: string}, setOpen: boolean, setError: boolean, Router: {refresh: Function}) {
     (startup.city ? null : startup.city = "?");
     (startup.industry ? null : startup.industry = "?");
 
     const addToServer = await fetch(`${process.env.SERVER}/addNew`, {method: "POST", cache: 'no-cache',headers: {"Content-Type": "application/json"}, body: JSON.stringify({startup })});
     const result = await addToServer.json();
-    console.log(result)
-    result ? setOpen(false) : setError(`Failed Adding Startup due to ${result}`);
+    if (result) {
+        setOpen(false)
+        Router.refresh()
+
+    } 
+    else 
+    { setError(`Failed Adding Startup due to ${result}`); }
 
 }
 
