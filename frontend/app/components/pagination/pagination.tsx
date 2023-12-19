@@ -2,7 +2,7 @@
  import { useSearchParams, useRouter } from "next/navigation"
 
 
-export default function pagination() {
+export default function Pagination() {
     let searchParams = useSearchParams()
     let pageNo: number | undefined = searchParams.get('page')
     let Router = useRouter()
