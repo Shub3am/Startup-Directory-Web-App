@@ -1,0 +1,2 @@
+DB_TABLE = "Example"
+NEXT_PUBLIC_SERVER_URL = "http://localhost:8080"
