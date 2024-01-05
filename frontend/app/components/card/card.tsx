@@ -11,7 +11,7 @@ export default function Card({ name, foundingYear, Funding, Description, City, I
           <div className="minmaxContainer">
       <div className="min">
         <p className="minHeading">Funding</p>
-        <p className="minTemp">{Funding}$</p>
+        <p className="minTemp">{Funding? Funding+'$' : "Unknown"}</p>
       </div>
       <div className="max">
         <p className="maxHeading">City</p>

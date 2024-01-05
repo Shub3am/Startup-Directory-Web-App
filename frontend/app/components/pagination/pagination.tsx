@@ -7,7 +7,7 @@ export default function Pagination() {
     let pageNo: number | undefined = searchParams.get('page')
     let Router = useRouter()
 
-    return (<div><button onClick={()=> {
+    return (<div className="pb-5"><button onClick={()=> {
         Router.push("/")
     }} className="relative mx-2">
     <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-gray-700"></span>

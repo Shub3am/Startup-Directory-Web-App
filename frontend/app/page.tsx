@@ -6,8 +6,9 @@ type Schema = {
 }
 
 async function getRecords(pageNo: number) {
-  let res = await fetch(process.env.SERVER, {method: "POST", cache: "no-cache",headers: {"Content-Type": "application/json"}, body: JSON.stringify({page: pageNo})})
+  let res = await fetch(`${process.env.SERVER}/api/getData`, {method: "POST", cache: "no-cache",headers: {"Content-Type": "application/json"}, body: JSON.stringify({page: pageNo})})
   let data = await res.json()
+
   return data
 }
 
@@ -19,14 +20,15 @@ export default async function Home({searchParams}: {searchParams: {search: strin
     pageNo = Number(searchParams.page)
   }
   let data:[Schema] = await getRecords(pageNo)
+
   const Startup_Card = data.map( (single_startup: Schema) => { 
-    let {ID, Name, Founded, City, Funding_Amount, Description, Industry} = single_startup
+    let {ID, NAME, FOUNDED, CITY, FUNDING_AMOUNT, DESCRIPTION, INDUSTRY} = single_startup
     
-    let query = <div key={ID}><Card name={Name} foundingYear={Founded} Description={Description} Industry={Industry} City={City} Funding={Funding_Amount} /></div>
+    let query = <div key={ID}><Card name={NAME} foundingYear={FOUNDED} Description={DESCRIPTION} Industry={INDUSTRY} City={CITY} Funding={FUNDING_AMOUNT} /></div>
     //Search Parameters for Search Function, refer to component/Search
 
     //If Search query is there, return the item if matches
-    if ( searchParams.search && searchParams.search.length && Name.toLowerCase().includes( searchParams.search.toLowerCase())) {
+    if ( searchParams.search && searchParams.search.length && NAME.toLowerCase().includes( searchParams.search.toLowerCase())) {
     return query }
     //If searchquery is undefined, return the item
     else if (searchParams.search == undefined) {

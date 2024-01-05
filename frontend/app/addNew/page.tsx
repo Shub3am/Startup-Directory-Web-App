@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 function PopupModal({setOpen}) {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
-    const [funding, setFunding] = useState("")
+    const [Funding_Amount, setFunding] = useState("")
     const [industry, setIndustry] = useState("")
     const [city, setCity] = useState("")
-    const [date, setDate] = useState("")
+    const [Founded, setDate] = useState("")
     const [error, setError] = useState(false)
     const [investor, setInvestor] = useState("")
 
@@ -36,7 +36,7 @@ function PopupModal({setOpen}) {
             <label htmlFor="funding" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Funding*</label>
             <div className="relative mb-5 mt-2">
                 
-                <input onChange={(evt)=> setFunding(evt.target.value)} id="funding" type="number" className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="6900$" required/>
+                <input onChange={(evt)=> setFunding(Number(evt.target.value))} id="funding" type="number" className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="6900$" required/>
             </div>
             <label htmlFor="funding" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Investor*</label>
             <div className="relative mb-5 mt-2">
@@ -56,7 +56,7 @@ function PopupModal({setOpen}) {
             <div className="flex items-center justify-start w-full">
                 <button type="submit" onClick={(evt)=>{
                     evt.preventDefault()
-                    createStartup({name,description,date ,industry,funding, investor,city}, setOpen, setError, router)
+                    createStartup({name,description,Founded ,industry,Funding_Amount, investor,city}, setOpen, setError, router)
                 }} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">Submit</button>
                 <button className="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm" onClick={()=>setOpen(false)}>Cancel</button>
             </div></form>
@@ -73,16 +73,16 @@ function PopupModal({setOpen}) {
 </div>
 }
 
-async function createStartup(startup: {name:string,description:string,date: Date,industry: string, funding: number, investor: string, city: string}, setOpen: boolean, setError: boolean, Router: {refresh: Function}) {
-    (startup.city ? null : startup.city = "?");
-    (startup.industry ? null : startup.industry = "?");
+async function createStartup(startup: {name:string,description:string,Founded: Date,industry: string, funding: number, investor: string, city: string}, setOpen: boolean, setError: boolean, Router: {refresh: Function}) {
+    (startup.city ? null : startup.city = "Unknown");
+    (startup.industry ? null : startup.industry = "Unknown");
 
-    const addToServer = await fetch(`${process.env.SERVER}/addNew`, {method: "POST", cache: 'no-cache',headers: {"Content-Type": "application/json"}, body: JSON.stringify({startup })});
+    const addToServer = await fetch(`${process.env.SERVER}/api/addData`, {method: "POST", cache: 'no-cache',headers: {"Content-Type": "application/json"}, body: JSON.stringify({startup })});
     const result = await addToServer.json();
+    console.log(result)
     if (result) {
         setOpen(false)
         Router.refresh()
-
     } 
     else 
     { setError(`Failed Adding Startup due to ${result}`); }

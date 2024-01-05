@@ -3,13 +3,6 @@ import AddNew from "../../addNew/page"
 export default async function HEADER() {
     return (<header className="bg-gray-50">
     <div className="mx-auto flex flex-col align-items-center md:flex-row justify-center md:justify-between max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-
-        
-  
-        
-  
-  
-
       <div className="m-auto flex justify-center flex-col">
         <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Welcome to Sperch!</h1>
   
