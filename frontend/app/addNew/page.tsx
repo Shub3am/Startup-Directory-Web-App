@@ -79,7 +79,7 @@ async function createStartup(startup: {name:string,description:string,Founded: D
 
     const addToServer = await fetch(`${process.env.SERVER}/api/addData`, {method: "POST", cache: 'no-cache',headers: {"Content-Type": "application/json"}, body: JSON.stringify({startup })});
     const result = await addToServer.json();
-    console.log(result)
+    
     if (result) {
         setOpen(false)
         Router.refresh()

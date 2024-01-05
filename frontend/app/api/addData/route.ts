@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     Object.keys(data).forEach(property=> { data[property.toUpperCase()] = data[property]
     delete data[property]})
     const result = await prisma.startups.create({data: body.startup})
-    console.log(result)
+    
     return NextResponse.json(result)
 } catch(err) {
     return NextResponse.json(`Page Property Missing ${err}`)
